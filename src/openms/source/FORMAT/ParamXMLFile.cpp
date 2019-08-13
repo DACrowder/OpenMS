@@ -88,7 +88,7 @@ namespace OpenMS
 
     os.precision(writtenDigits<double>(0.0));
 
-    os << "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n";
+    os << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
     os << "<PARAMETERS version=\"" << getVersion() << "\" xsi:noNamespaceSchemaLocation=\"https://raw.githubusercontent.com/OpenMS/OpenMS/develop/share/OpenMS/SCHEMAS/Param_1_7_0.xsd\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n";
     String indentation = "  ";
     Param::ParamIterator it = param.begin();
