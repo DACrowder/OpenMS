@@ -28,62 +28,44 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 # --------------------------------------------------------------------------
-# $Maintainer: Stephan Aiche $
-# $Authors: Stephan Aiche $
+# $Maintainer: Alex Crowder $
+# $Authors: Alex Crowder $
 # --------------------------------------------------------------------------
 
-cmake_minimum_required(VERSION 3.0.2 FATAL_ERROR)
-project("OpenMS_src")
-
-#------------------------------------------------------------------------------
-# OpenSWATHAlgo lib
-#------------------------------------------------------------------------------
-add_subdirectory(openswathalgo)
-
-#------------------------------------------------------------------------------
-# OpenMS core lib
-#------------------------------------------------------------------------------
-add_subdirectory(openms)
-
-#------------------------------------------------------------------------------
-# SuperHirn lib
-#------------------------------------------------------------------------------
-add_subdirectory(superhirn)
-
-#------------------------------------------------------------------------------
-# OpenMS.NET lib
-#------------------------------------------------------------------------------
-option(OPENMSNET "setup build system for .NET bindings" OFF)
-if(OPENMSNET)
-  add_subdirectory(openmsNET)
+project("OpenMSNET")
+cmake_minimum_required(VERSION 3.15.3 FATAL_ERROR)
+if(NOT MSVC)
+  message(FATAL_ERROR "MSVC required to build /clr C++/CLI")
+elseif(NOT WIN32)
+  message(FATAL_ERROR "Windows required for building /clr C++/CLI")
 endif()
+# --------------------------------------------------------------------------
+#  set internal source and header cache vars
+set(OpenMSNET_sources  CACHE INTERNAL "This variable should hold all OpenMS sources at the end of the config step" )
+set(OpenMSNET_sources_h  CACHE INTERNAL "This variable should hold all OpenMS sources at the end of the config step" )
+
+# --------------------------------------------------------------------------
+# include implementation sources.cmake files
+include(source/MANAGEDAPI/sources.cmake)
+
+# --------------------------------------------------------------------------
+# include header sources.cmake files
+include(include/OpenMS/MARSHALLERS/sources.cmake)
+include(include/OpenMS/MANAGEDAPI/sources.cmake)
+# --------------------------------------------------------------------------
 
 #------------------------------------------------------------------------------
-# pyOpenMS
+# add the library
+openms_add_library(TARGET_NAME OpenMSNET
+                   SOURCE_FILES ${OpenMSNET_sources}
+                   HEADER_FILES ${OpenMSNET_sources_h}
+                   INTERNAL_INCLUDES ${PROJECT_SOURCE_DIR}/include ${PROJECT_BINARY_DIR}/include
+                   EXTERNAL_INCLUDES ${OpenMS_INCLUDE_DIRECTORIES}
+                   LINK_LIBRARIES OpenMS
+                   DLL_EXPORT_PATH "OpenMS/OpenMSNET/")
+# --------------------------------------------------------------------------
+# link libraries for any external managed libraries/tools (CLR tools)
+set(OpenMSNET_LIBRARIES OpenMSNET OpenMS CACHE INTERNAL "OpenMSNET managed CLI wrapper libraries" FORCE)
 #------------------------------------------------------------------------------
-option(PYOPENMS "setup build system for pyOpenMS" OFF)
-if(PYOPENMS)
-  add_subdirectory(pyOpenMS)
-endif()
-
-if(WITH_GUI)
-  #------------------------------------------------------------------------------
-  # OpenMS gui lib
-  #------------------------------------------------------------------------------
-  add_subdirectory(openms_gui)
-endif()
-
-#------------------------------------------------------------------------------
-# TOPP tools
-#------------------------------------------------------------------------------
-add_subdirectory(topp)
-
-#------------------------------------------------------------------------------
-# UTILS tools
-#------------------------------------------------------------------------------
-add_subdirectory(utils)
-
-#------------------------------------------------------------------------------
-# Tests
-#------------------------------------------------------------------------------
-add_subdirectory(tests)
+## register paths for doxygen
+openms_doc_path("${PROJECT_SOURCE_DIR}/include")
