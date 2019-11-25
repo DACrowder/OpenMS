@@ -42,23 +42,21 @@ endif()
 # --------------------------------------------------------------------------
 #  set internal source and header cache vars
 set(OpenMSNET_sources  CACHE INTERNAL "This variable should hold all OpenMS sources at the end of the config step" )
-set(OpenMSNET_sources_h  CACHE INTERNAL "This variable should hold all OpenMS sources at the end of the config step" )
+set(OpenMSNET_headers  CACHE INTERNAL "This variable should hold all OpenMS headers at the end of the config step" )
 
 # --------------------------------------------------------------------------
 # include implementation sources.cmake files
-include(source/MANAGEDAPI/sources.cmake)
+include(source/CLI/sources.cmake)
 
 # --------------------------------------------------------------------------
 # include header sources.cmake files
-include(include/OpenMS/MARSHALLERS/sources.cmake)
-include(include/OpenMS/MANAGEDAPI/sources.cmake)
-# --------------------------------------------------------------------------
+include(include/OpenMSNET/CLI/sources.cmake)
 
 #------------------------------------------------------------------------------
 # add the library
 openms_add_library(TARGET_NAME OpenMSNET
                    SOURCE_FILES ${OpenMSNET_sources}
-                   HEADER_FILES ${OpenMSNET_sources_h}
+                   HEADER_FILES ${OpenMSNET_headers}
                    INTERNAL_INCLUDES ${PROJECT_SOURCE_DIR}/include ${PROJECT_BINARY_DIR}/include
                    EXTERNAL_INCLUDES ${OpenMS_INCLUDE_DIRECTORIES}
                    LINK_LIBRARIES OpenMS

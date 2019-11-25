@@ -1,13 +1,12 @@
 #pragma once
-#include <msclr>
-#include <marshal.h>
-#include <marshal_cppstd.h>
+#include <msclr/marshal.h>
+#include <msclr/marshal_cppstd.h>
 #include <OpenMS/DATASTRUCTURES/DPosition.h>
-#include <ScopedPointer.h>
+#include <OpenMSNET/CLI/ScopedPointer.h>
 
 namespace OpenMSNET
 {
-  template<UInt D, typename TCoordinate = double>
+  template<System::UInt64 D, typename TCoordinate = double>
   public ref class DPosition
   {
   private:
@@ -128,7 +127,7 @@ namespace OpenMSNET
       return %this;
     }
 
-    inline static property DPosition^ Zero
+    static property DPosition^ Zero
     {
       DPosition^ get()
       {
@@ -137,7 +136,7 @@ namespace OpenMSNET
       }
     }
 
-    inline static property DPosition^ MinPositive
+    static property DPosition^ MinPositive
     {
       DPosition^ get()
       {
@@ -146,7 +145,7 @@ namespace OpenMSNET
       }
     }
 
-    inline static property DPosition^ MinNegative
+    static property DPosition^ MinNegative
     {
       DPosition^ get()
       {
@@ -155,7 +154,7 @@ namespace OpenMSNET
       }
     }
 
-    inline static property DPosition^ MaxPositive
+    static property DPosition^ MaxPositive
     {
       DPosition^ get()
       {
@@ -174,7 +173,6 @@ namespace OpenMSNET
         mIsDisposed = true;
       }
     }
-
   };
-}
+};
 

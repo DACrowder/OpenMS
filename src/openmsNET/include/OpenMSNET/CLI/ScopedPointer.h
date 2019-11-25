@@ -72,5 +72,6 @@ namespace OpenMSNET
   inline void swap( ScopedPointer<T>% left, ScopedPointer<T>% right )
   {
     left.swap(right);
-  }
-}
+  };
+
+};

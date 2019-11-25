@@ -53,7 +53,7 @@ add_subdirectory(superhirn)
 #------------------------------------------------------------------------------
 # OpenMS.NET lib
 #------------------------------------------------------------------------------
-option(OPENMSNET "setup build system for .NET bindings" OFF)
+option(OPENMSNET "setup build system for .NET bindings" ON)
 if(OPENMSNET)
   add_subdirectory(openmsNET)
 endif()

@@ -34,7 +34,7 @@
 
 ### list all files of the directory here
 set(sources_list
-
+		Peak1D.cpp
 )
 
 ### the directory name
@@ -45,7 +45,6 @@ set(sources)
 foreach(i ${sources_list})
 	list(APPEND sources ${directory}/${i})
 endforeach(i)
-
 source_group("Source Files\\CLI" FILES ${sources})
 set(OpenMSNET_sources ${OpenMSNET_sources} ${sources})
 
