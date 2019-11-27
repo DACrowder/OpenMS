@@ -1,7 +1,7 @@
 #pragma once
 #include <msclr/marshal.h>
 #include <msclr/marshal_cppstd.h>
-#include <OpenMSNET/CLI/DPosition1.h>
+#include <CLI/DPosition1.h>
 
 #include <OpenMS/KERNEL/Peak1D.h>
 namespace OpenMSNET

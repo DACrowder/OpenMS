@@ -1,5 +1,5 @@
 #pragma once
-#include <OpenMSNET/CLI/DPosition1.h>
+#include <CLI/DPosition1.h>
 namespace OpenMSNET
 {
 	DPosition1::DPosition1()
@@ -51,4 +51,34 @@ namespace OpenMSNET
 		bool yes = this->inst->spatiallyGreaterEqual(*(point->inst));
 		return yes;
 	}
+
+	DPosition1^ DPosition1::Zero::get()
+	{
+		OpenMS::DPosition<1>* mp = new OpenMS::DPosition<1>(OpenMS::DPosition<1>::zero());
+		DPosition1^ dp = gcnew DPosition1(*mp);
+		return dp;
+	}
+
+	DPosition1^ DPosition1::MinPositive::get()
+	{
+		OpenMS::DPosition<1>* mp = new OpenMS::DPosition<1>(OpenMS::DPosition<1>::minPositive());
+		DPosition1^ dp = gcnew DPosition1(*mp);
+		return dp;
+	}
+
+	DPosition1^ DPosition1::MinNegative::get()
+	{
+		OpenMS::DPosition<1>* mp = new OpenMS::DPosition<1>(OpenMS::DPosition<1>::minNegative());
+		DPosition1^ dp = gcnew DPosition1(*mp);
+		return dp;
+	}
+
+	DPosition1^ DPosition1::MaxPositive::get()
+	{
+		OpenMS::DPosition<1>* mp = new OpenMS::DPosition<1>(OpenMS::DPosition<1>::maxPositive());
+		DPosition1^ dp = gcnew DPosition1(*mp);
+		return dp;
+	}
+	
+
 }

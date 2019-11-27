@@ -17,22 +17,22 @@ namespace OpenMSNET
 
 		property double  X
 		{
-			void set(double x) { this->inst->setX(x); }
-			double get() { return this->inst->getX(); }
+			void set(double x);
+			double get();
 		}
 
 		property double  Y
 		{
-			void set(double y) { this->inst->setY(y); }
-			double get() { return this->inst->getY(); }
+			void set(double y);
+			double get();
 		}
 
-		inline bool operator==(DPosition2% point) { return this->inst == point.inst; }
-		inline bool operator!=(DPosition2% point) { return this->inst != point.inst; }
-		inline bool operator<(DPosition2% point) { return this->inst < point.inst; }
-		inline bool operator<=(DPosition2% point) { return this->inst <= point.inst; }
-		inline bool operator>(DPosition2% point) { return this->inst <= point.inst; }
-		inline bool operator>=(DPosition2% point) { return this->inst <= point.inst; }
+		bool operator==(DPosition2% point) { return this->inst == point.inst; }
+		bool operator!=(DPosition2% point) { return this->inst != point.inst; }
+		bool operator<(DPosition2% point) { return this->inst < point.inst; }
+		bool operator<=(DPosition2% point) { return this->inst <= point.inst; }
+		bool operator>(DPosition2% point) { return this->inst <= point.inst; }
+		bool operator>=(DPosition2% point) { return this->inst <= point.inst; }
 
 		bool SpatiallyLessEqual(DPosition2^ point);
 		bool SpatiallyGreaterEqual(DPosition2^ point);

@@ -1,5 +1,5 @@
 #pragma once
-#include <OpenMSNET/CLI/DPosition2.h>
+#include <CLI/DPosition2.h>
 namespace OpenMSNET
 {
 	DPosition2::DPosition2()
@@ -50,5 +50,27 @@ namespace OpenMSNET
 	{
 		bool yes = this->inst->spatiallyGreaterEqual(*(point->inst));
 		return yes;
+	}
+
+	void DPosition2::X::set(double x)
+	{
+		this->inst->setX(x);
+	}
+
+	double DPosition2::X::get()
+	{
+		double x = this->inst->getX();
+		System::Console::WriteLine(x);
+		return x;
+	}
+
+	void DPosition2::Y::set(double y)
+	{
+		this->inst->setY(y);
+	}
+
+	double DPosition2::Y::get()
+	{
+		return this->inst->getY();
 	}
 }

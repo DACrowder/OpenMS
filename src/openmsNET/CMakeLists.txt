@@ -46,7 +46,7 @@ set(OpenMSNET_headers  CACHE INTERNAL "This variable should hold all OpenMS head
 
 # --------------------------------------------------------------------------
 # include header sources.cmake files
-include(include/OpenMSNET/CLI/sources.cmake)
+include(include/CLI/sources.cmake)
 # --------------------------------------------------------------------------
 # include implementation sources.cmake files
 include(source/CLI/sources.cmake)
