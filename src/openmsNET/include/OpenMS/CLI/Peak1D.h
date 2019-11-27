@@ -1,47 +1,45 @@
 #pragma once
-#include <OpenMSNET/CLI/ScopedPointer.h>
-#include <OpenMSNET/CLI/DPosition.h>
+#include <msclr/marshal.h>
+#include <msclr/marshal_cppstd.h>
+#include <OpenMS/CLI/DPosition1.h>
+
 #include <OpenMS/KERNEL/Peak1D.h>
-#include <msclr/lock.h>
 namespace OpenMSNET
 {
   public ref class Peak1D
   {
-
-  private:
-	  bool mIsDisposed;
-	  ScopedPointer<OpenMS::Peak1D*>^ inst;
-
   public:
-    inline Peak1D()
-    {
-      this->mIsDisposed = false;
-      this->inst = gcnew ScopedPointer<OpenMS::Peak1D*>(new OpenMS::Peak1D);
-    }
+	Peak1D();
+	Peak1D(double mz, float intensity);
+	Peak1D(OpenMS::Peak1D& p);
+	
+	~Peak1D();
 
-    inline Peak1D(double mz, float intensity)
-    {
-      this->mIsDisposed = false;
-      this->inst = gcnew ScopedPointer<OpenMS::Peak1D*>(new OpenMS::Peak1D(mz, intensity));
-    }
+	OpenMS::Peak1D* inst;
 
-    inline Peak1D(OpenMS::Peak1D& p)
-    {
-      this->mIsDisposed = false;
-      this->inst = gcnew ScopedPointer<OpenMS::Peak1D*>(new OpenMS::Peak1D(p));
-    }
+	property float Intensity
+	{
+		void set(float i);
+		float get();
+	};
 
-    ~Peak1D();
+	property double MZ
+	{
+		void set(double mz);
+		double get();
+	};
 
-    property float Intensity;
+	property double Pos
+	{
+		void set(double p);
+		double get();
+	};
 
-    property double MZ;
-
-    double Pos;
-
-    property DPosition<1, double> Position;
-
-    Peak1D% operator=(const Peak1D% rhs);
+	property DPosition1^ Position
+	{
+		void set(DPosition1^ p);
+		DPosition1^ get();
+	};
 
     inline bool MZLess(Peak1D% lhs, Peak1D% rhs) { return lhs.MZ < rhs.MZ; }
     inline bool MZLess(Peak1D% lhs, double rhs) { return lhs.MZ < rhs; }
@@ -59,8 +57,9 @@ namespace OpenMSNET
     inline bool IntensityLess(float lhs, float rhs) { return lhs < rhs; }
 
   protected:
-    !Peak1D();
-
+	  !Peak1D();
+  private:
+	  bool mIsDisposed;
   };
 }
 

@@ -33,24 +33,24 @@
 # --------------------------------------------------------------------------
 
 ### list all files of the directory here
-set(sources_list
-		Peak1D.cpp
-		DPosition1.cpp
-		DPosition2.cpp
+set(sources_h_list
+  Peak1D.h
+  DPosition1.h	
+  DPosition2.h
 )
 
 ### the directory name
-set(directory source/CLI)
+set(directory include/OpenMS/CLI)
 
 ### add path to the source filenames
-set(sources)
-foreach(i ${sources_list})
-	list(APPEND sources ${directory}/${i})
+set(sources_h)
+foreach(i ${sources_h_list})
+	list(APPEND sources_h ${directory}/${i})
 endforeach(i)
 
 ### VS filter definition
-source_group("Source Files\\CLI" FILES ${sources})
+source_group("Header Files\\CLI" FILES ${sources_h})
 
 ### Add these headers to cumulative headers list
-set(OpenMSNET_sources ${OpenMSNET_sources} ${sources})
+set(OpenMSNET_sources_h ${OpenMSNET_sources_h} ${sources_h})
 
