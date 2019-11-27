@@ -1,5 +1,5 @@
-#include <OpenMS/CLI/DPosition1.h>
-#include <OpenMS/CLI/Peak1D.h>
+#include <OpenMSNET/CLI/DPosition1.h>
+#include <OpenMSNET/CLI/Peak1D.h>
 
 OpenMSNET::Peak1D::Peak1D()
 {

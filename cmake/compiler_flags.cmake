@@ -65,7 +65,6 @@ if (CMAKE_COMPILER_IS_GNUCXX)
   if (CMAKE_GENERATOR STREQUAL "Eclipse CDT4 - Unix Makefiles")
     add_compile_options(-fmessage-length=0)
   endif()
-
   
 elseif (MSVC)
 	# do not use add_definitions

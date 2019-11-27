@@ -117,7 +117,7 @@ function(openms_add_library)
   #------------------------------------------------------------------------------
   # parse arguments to function
   set(options )
-  set(oneValueArgs TARGET_NAME DLL_EXPORT_PATH)
+  set(oneValueArgs TARGET_NAME DLL_EXPORT_PATH CLR_TARGET)
   set(multiValueArgs INTERNAL_INCLUDES PRIVATE_INCLUDES EXTERNAL_INCLUDES SOURCE_FILES HEADER_FILES LINK_LIBRARIES PRIVATE_LINK_LIBRARIES)
   cmake_parse_arguments(openms_add_library "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN} )
 
@@ -173,6 +173,13 @@ function(openms_add_library)
     list(LENGTH openms_add_library_LINK_LIBRARIES _library_count)
   endif()
 
+  if(openms_add_library_CLR_TARGET)
+    message(STATUS "  Compile ${openms_add_library_TARGET_NAME} for CLR")
+    set_property(
+       TARGET ${openms_add_library_TARGET_NAME}
+       PROPERTY COMMON_LANGUAGE_RUNTIME ""
+    )
+  endif()
   #------------------------------------------------------------------------------
   # Export libraries (self + dependencies)
   set(${openms_add_library_TARGET_NAME}_LIBRARIES

@@ -40,7 +40,7 @@ set(sources_h_list
 )
 
 ### the directory name
-set(directory include/OpenMS/CLI)
+set(directory include/OpenMSNET/CLI)
 
 ### add path to the source filenames
 set(sources_h)
@@ -49,7 +49,7 @@ foreach(i ${sources_h_list})
 endforeach(i)
 
 ### VS filter definition
-source_group("Header Files\\CLI" FILES ${sources_h})
+source_group("Header Files\\OpenMSNET\\CLI" FILES ${sources_h})
 
 ### Add these headers to cumulative headers list
 set(OpenMSNET_sources_h ${OpenMSNET_sources_h} ${sources_h})

@@ -1,5 +1,5 @@
 #pragma once
-#include <OpenMS/CLI/DPosition1.h>
+#include <OpenMSNET/CLI/DPosition1.h>
 namespace OpenMSNET
 {
 	DPosition1::DPosition1()

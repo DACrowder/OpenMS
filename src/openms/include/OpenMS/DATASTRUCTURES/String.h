@@ -531,7 +531,7 @@ public:
 
       StringView sv(*this);
       sv.begin_ = begin_ + start;
-      sv.size_ = std::min(length, sv.size_ - start);
+      sv.size_ = (std::min)(length, sv.size_ - start);
       return sv;
     }
     

@@ -45,12 +45,11 @@ set(OpenMSNET_sources  CACHE INTERNAL "This variable should hold all OpenMS sour
 set(OpenMSNET_headers  CACHE INTERNAL "This variable should hold all OpenMS headers at the end of the config step" )
 
 # --------------------------------------------------------------------------
-# include implementation sources.cmake files
-include(source/CLI/sources.cmake)
-
-# --------------------------------------------------------------------------
 # include header sources.cmake files
 include(include/OpenMSNET/CLI/sources.cmake)
+# --------------------------------------------------------------------------
+# include implementation sources.cmake files
+include(source/CLI/sources.cmake)
 
 #------------------------------------------------------------------------------
 # add the library
@@ -60,10 +59,13 @@ openms_add_library(TARGET_NAME OpenMSNET
                    INTERNAL_INCLUDES ${PROJECT_SOURCE_DIR}/include ${PROJECT_BINARY_DIR}/include
                    EXTERNAL_INCLUDES ${OpenMS_INCLUDE_DIRECTORIES}
                    LINK_LIBRARIES OpenMS
-                   DLL_EXPORT_PATH "OpenMS/OpenMSNET/")
+                   DLL_EXPORT_PATH "OpenMS/OpenMSNET/"
+                   CLR_TARGET true
+                 )
 # --------------------------------------------------------------------------
 # link libraries for any external managed libraries/tools (CLR tools)
 set(OpenMSNET_LIBRARIES OpenMSNET OpenMS CACHE INTERNAL "OpenMSNET managed CLI wrapper libraries" FORCE)
+
 #------------------------------------------------------------------------------
 ## register paths for doxygen
 openms_doc_path("${PROJECT_SOURCE_DIR}/include")
