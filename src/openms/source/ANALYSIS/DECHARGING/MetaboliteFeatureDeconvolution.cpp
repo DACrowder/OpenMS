@@ -2,7 +2,7 @@
 //                   OpenMS -- Open-Source Mass Spectrometry
 // --------------------------------------------------------------------------
 // Copyright The OpenMS Team -- Eberhard Karls University Tuebingen,
-// ETH Zurich, and Freie Universitaet Berlin 2002-2018.
+// ETH Zurich, and Freie Universitaet Berlin 2002-2020.
 //
 // This software is released under a three-clause BSD license:
 //  * Redistributions of source code must retain the above copyright
@@ -223,8 +223,10 @@ namespace OpenMS
       }
 
       // determine charge of adduct (by # of '+' or '-')
-      Int pos_charge = adduct[1].size() - adduct[1].remove('+').size();
-      Int neg_charge = adduct[1].size() - adduct[1].remove('-').size();
+      Size charge_s_len = adduct[1].size();
+      Int pos_charge = charge_s_len - adduct[1].remove('+').size();
+      charge_s_len = adduct[1].size();
+      Int neg_charge = charge_s_len - adduct[1].remove('-').size();
       if (pos_charge > 0 && neg_charge > 0)
       {
         String error = "MetaboliteFeatureDeconvolution::potential_adduct mixes charges for an adduct!";
@@ -573,7 +575,7 @@ namespace OpenMS
                   right_charges = md_s->getPositiveCharges();
                 }
 
-                if ( // compomer fits charge assignment of left & right feature. doesnt consider charge sign switch over span!
+                if ( // compomer fits charge assignment of left & right feature. doesn't consider charge sign switch over span!
                   (abs(q1)  >= abs(left_charges)) && (abs(q2) >= abs(right_charges)))
                 {
                   // compomer has better probability

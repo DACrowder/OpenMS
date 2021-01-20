@@ -2,7 +2,7 @@
 //                   OpenMS -- Open-Source Mass Spectrometry
 // --------------------------------------------------------------------------
 // Copyright The OpenMS Team -- Eberhard Karls University Tuebingen,
-// ETH Zurich, and Freie Universitaet Berlin 2002-2018.
+// ETH Zurich, and Freie Universitaet Berlin 2002-2020.
 //
 // This software is released under a three-clause BSD license:
 //  * Redistributions of source code must retain the above copyright
@@ -549,7 +549,7 @@ namespace OpenMS
       if (*grp_it >= origin_groups.size())
       {
        OPENMS_LOG_FATAL_ERROR << "Something went terribly wrong. "
-                           "Group with index " << *grp_it << "doesnt exist. "
+                           "Group with index " << *grp_it << "doesn't exist. "
                                                              " ProteinPeptideResolution: Groups changed"
                                                              " after building data structures." << std::endl;
       }
@@ -619,7 +619,7 @@ namespace OpenMS
           if (*grp_it >= origin_groups.size())
           {
            OPENMS_LOG_FATAL_ERROR << "Something went terribly wrong. "
-                               "Group with index " << *grp_it << "doesnt exist. "
+                               "Group with index " << *grp_it << "doesn't exist. "
                                                                  " ProteinPeptideResolution: Groups changed"
                                                                  " after building data structures." << std::endl;
           }
@@ -721,7 +721,7 @@ namespace OpenMS
       if (*grp_it >= origin_groups.size())
       {
        OPENMS_LOG_FATAL_ERROR << "Something went terribly wrong. "
-                           "Group with index " << *grp_it << "doesnt exist. "
+                           "Group with index " << *grp_it << "doesn't exist. "
                                                              " ProteinPeptideResolution: Groups changed"
                                                              " after building data structures." << std::endl;
       }

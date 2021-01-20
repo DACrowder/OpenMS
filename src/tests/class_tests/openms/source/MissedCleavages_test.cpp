@@ -2,7 +2,7 @@
 //                   OpenMS -- Open-Source Mass Spectrometry
 // --------------------------------------------------------------------------
 // Copyright The OpenMS Team -- Eberhard Karls University Tuebingen,
-// ETH Zurich, and Freie Universitaet Berlin 2002-2018.
+// ETH Zurich, and Freie Universitaet Berlin 2002-2020.
 //
 // This software is released under a three-clause BSD license:
 //  * Redistributions of source code must retain the above copyright
@@ -91,11 +91,18 @@ START_TEST(MissedCleavages, "$Id$")
   //construct features with peptideIdentifications
   Feature feat_empty_pi;
   feat_empty_pi.setPeptideIdentifications(pep_ids_empty);
+  feat_empty_pi.setMetaValue("FWHM", 32.21);
+
   Feature feat;
   feat.setPeptideIdentifications(pep_ids);
+  feat.setMetaValue("FWHM", 32.21);
+
   Feature feat_empty;
+  feat_empty.setMetaValue("FWHM", 32.21);
+
   Feature feat_3;
   feat_3.setPeptideIdentifications(pep_ids_3);
+  feat_3.setMetaValue("FWHM", 32.21);
 
   //FeatureMap
   FeatureMap feature_map;
@@ -133,7 +140,7 @@ START_TEST(MissedCleavages, "$Id$")
 
   MissedCleavages* ptr = nullptr;
   MissedCleavages* nulpt = nullptr;
-  START_SECTION(MissedCleavges())
+  START_SECTION(MissedCleavages())
   {
   ptr = new MissedCleavages();
   TEST_NOT_EQUAL(ptr, nulpt)
@@ -162,8 +169,9 @@ START_TEST(MissedCleavages, "$Id$")
 
     std::vector<UInt32> frequ;
 
-    //test if result is stored as MetaInformation in PeptidHits in FeatureMap
-    auto lam = [&frequ](PeptideIdentification& pep_id)
+    //test if result is stored as MetaInformation in PeptideHits in FeatureMap
+    auto lam =
+        [&frequ](PeptideIdentification& pep_id)
     {
       if(pep_id.getHits().empty())
       {
@@ -175,11 +183,11 @@ START_TEST(MissedCleavages, "$Id$")
       }
     };
 
-    OpenMS::QCBase::iterateFeatureMap(feature_map, lam);
+    feature_map.applyFunctionOnPeptideIDs(lam);
     TEST_EQUAL(frequ.size(), 4)
-    TEST_EQUAL(frequ[0], 1)
+    TEST_EQUAL(frequ[0], 0)
     TEST_EQUAL(frequ[1], 1)
-    TEST_EQUAL(frequ[2], 0)
+    TEST_EQUAL(frequ[2], 1)
     TEST_EQUAL(frequ[3], 1)
 
     //empty feature map
@@ -221,8 +229,7 @@ START_TEST(MissedCleavages, "$Id$")
 
   START_SECTION(QCBase::Status requires() const override)
   {
-    QCBase::Status stat = QCBase::Status() | QCBase::Requires::POSTFDRFEAT;
-    TEST_EQUAL(stat, mc.requires())
+    TEST_EQUAL(QCBase::Status(QCBase::Requires::POSTFDRFEAT) == mc.requires(), true)
   }
   END_SECTION
 

@@ -2,7 +2,7 @@
 //                   OpenMS -- Open-Source Mass Spectrometry
 // --------------------------------------------------------------------------
 // Copyright The OpenMS Team -- Eberhard Karls University Tuebingen,
-// ETH Zurich, and Freie Universitaet Berlin 2002-2018.
+// ETH Zurich, and Freie Universitaet Berlin 2002-2020.
 //
 // This software is released under a three-clause BSD license:
 //  * Redistributions of source code must retain the above copyright
@@ -45,16 +45,22 @@
 namespace OpenMS
 {
   typedef std::map<UInt32, UInt32> MapU32;
-  //counts the number of MissedCleavages per PeptideIdentification.
-  //stores the result as a vector of maps and additionally in the FeatureMap
+
   void MissedCleavages::compute(FeatureMap& fmap)
   {
     MapU32 result{};
 
+    bool has_pepIDs = QCBase::hasPepID(fmap);
+    if (!has_pepIDs)
+    {
+      mc_result_.push_back(result);
+      return;
+    }
+
     // if the FeatureMap is empty, result is 0
     if (fmap.empty())
     {
-      OPENMS_LOG_WARN << "FeatureXML is empty.";
+      OPENMS_LOG_WARN << "FeatureXML is empty.\n";
       mc_result_.push_back(result);
       return;
     }
@@ -80,21 +86,21 @@ namespace OpenMS
     digestor.setMissedCleavages(0);
 
     //lambda function: digests the Sequence in PeptideHit and counts the number of missed cleavages
-    auto l = [&digestor, &result, &max_mc](PeptideIdentification& pep_id)
+    std::function<void(PeptideIdentification&)> l = [&digestor, &result, &max_mc](PeptideIdentification& pep_id)
     {
       if (pep_id.getHits().empty())
       {
-        OPENMS_LOG_WARN << "There is a Peptideidentification(RT: " << pep_id.getRT() << ", MZ: " << pep_id.getMZ() <<  ") without PeptideHits. " << "\n";
+        OPENMS_LOG_WARN << "There is a Peptideidentification(RT: " << pep_id.getRT() << ", MZ: " << pep_id.getMZ() <<  ") without PeptideHits.\n";
         return;
       }
       std::vector<AASequence> digest_output;
       digestor.digest(pep_id.getHits()[0].getSequence(), digest_output);
       UInt32 num_mc = UInt32(digest_output.size() - 1);
 
-      //Warning if number of missed cleavages is greater than the allowed maximum number of missed cleavages
+      // warn if number of missed cleavages is greater than allowed maximum number of missed cleavages
       if (num_mc > max_mc)
       {
-        OPENMS_LOG_WARN << "Observed number of missed cleavages: " << num_mc << " is greater than: " << max_mc << " the allowed maximum number of missed cleavages during MS2-Search in: " << pep_id.getHits()[0].getSequence();
+        OPENMS_LOG_WARN << "Observed number of missed cleavages: " << num_mc << " is greater than: " << max_mc << " the allowed maximum number of missed cleavages during MS2-Search in: " << pep_id.getHits()[0].getSequence() << "\n";
       }
 
       ++result[num_mc];
@@ -102,8 +108,8 @@ namespace OpenMS
       pep_id.getHits()[0].setMetaValue("missed_cleavages", num_mc);
     };
 
-    //function of QCBase, which iterates through all PeptideIdentifications of a given FeatureMap and applies the given lambda function
-    QCBase::iterateFeatureMap(fmap, l);
+    // iterate through all PeptideIdentifications of a given FeatureMap and applies the given lambda function
+    fmap.applyFunctionOnPeptideIDs(l);
 
     mc_result_.push_back(result);
   }
@@ -111,7 +117,8 @@ namespace OpenMS
   
   const String& MissedCleavages::getName() const
   {
-    return name_;
+    static const String& name = "MissedCleavages";
+    return name;
   }
   
 

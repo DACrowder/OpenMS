@@ -2,7 +2,7 @@
 //                   OpenMS -- Open-Source Mass Spectrometry
 // --------------------------------------------------------------------------
 // Copyright The OpenMS Team -- Eberhard Karls University Tuebingen,
-// ETH Zurich, and Freie Universitaet Berlin 2002-2018.
+// ETH Zurich, and Freie Universitaet Berlin 2002-2020.
 //
 // This software is released under a three-clause BSD license:
 //  * Redistributions of source code must retain the above copyright
@@ -371,6 +371,22 @@ namespace OpenMS
     return ms_levels_;
   }
 
+  const String sqMassRunID = "sqMassRunID";
+
+  UInt64 MSExperiment::getSqlRunID() const
+  {
+    if (metaValueExists(sqMassRunID))
+    {
+      return getMetaValue(sqMassRunID);
+    }
+    return 0;
+  }
+
+  void MSExperiment::setSqlRunID(UInt64 id)
+  {
+    setMetaValue(sqMassRunID, id);
+  }
+
   ///@}
 
   ///@name Sorting spectra and peaks
@@ -675,20 +691,14 @@ namespace OpenMS
   {
     // The TIC is (re)calculated from the MS1 spectra. Even if MSExperiment does not contain a TIC chromatogram explicitly, it can be reported.
     MSChromatogram TIC;
-    for (Base::const_iterator spec_it = spectra_.begin(); spec_it != spectra_.end(); ++spec_it)
+    for (const auto& spec: spectra_)
     {
-      if (spec_it->getMSLevel() == 1)
+      if (spec.getMSLevel() == 1)
       {
-        double totalIntensity = 0;
-        // sum intensities of a spectrum
-        for (SpectrumType::const_iterator peak_it = spec_it->begin(); peak_it != spec_it->end(); ++peak_it)
-        {
-          totalIntensity += static_cast<double>(peak_it->getIntensity());
-        }
         // fill chromatogram
         ChromatogramPeakType peak;
-        peak.setRT(spec_it->getRT());
-        peak.setIntensity(totalIntensity);
+        peak.setRT(spec.getRT());
+        peak.setIntensity(spec.getTIC());
         TIC.push_back(peak);
       }
     }
@@ -720,6 +730,51 @@ namespace OpenMS
       ms_levels_.clear();
       total_size_ = 0;
     }
+  }
+
+  // static
+  bool MSExperiment::containsScanOfLevel(size_t ms_level) const
+  {
+    //test if no scans with MS-level 1 exist
+    for (const auto& spec : getSpectra())
+    {
+      if (spec.getMSLevel() == ms_level)
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  bool MSExperiment::hasZeroIntensities(size_t ms_level) const
+  {
+    for (const auto& spec : getSpectra())
+    {
+      if (spec.getMSLevel() != ms_level)
+      {
+        continue;
+      }
+      for (const auto& p : spec)
+      {
+        if (p.getIntensity() == 0.0)
+        {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  bool MSExperiment::hasPeptideIdentifications() const
+  {
+    for (const auto& spec : getSpectra())
+    {
+      if (!spec.getPeptideIdentifications().empty())
+      {
+        return true;
+      }
+    }
+    return false;
   }
 
   MSExperiment::SpectrumType* MSExperiment::createSpec_(PeakType::CoordinateType rt)

@@ -2,7 +2,7 @@
 //                   OpenMS -- Open-Source Mass Spectrometry
 // --------------------------------------------------------------------------
 // Copyright The OpenMS Team -- Eberhard Karls University Tuebingen,
-// ETH Zurich, and Freie Universitaet Berlin 2002-2018.
+// ETH Zurich, and Freie Universitaet Berlin 2002-2020.
 //
 // This software is released under a three-clause BSD license:
 //  * Redistributions of source code must retain the above copyright
@@ -50,7 +50,7 @@ namespace OpenMS
       SiriusAdapterAlgorithm();
 
       /// Struct for temporary folder structure
-      struct OPENMS_DLLAPI SiriusTemporaryFileSystemObjects
+      class OPENMS_DLLAPI SiriusTemporaryFileSystemObjects
       {
       public:
 
@@ -72,6 +72,14 @@ namespace OpenMS
         String tmp_out_dir_;
 
       };
+
+      /**
+      @brief Sort function using the extracted scan_index from the sirius workspace file path
+
+      @return Vector of sorted sirius workspace paths based on the scan_index
+
+      */
+      static void sortSiriusWorkspacePathsByScanIndex(std::vector<String>& subdirs);
 
       /**
       @brief Preprocessing needed for SIRIUS

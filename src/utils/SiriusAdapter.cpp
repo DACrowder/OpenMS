@@ -2,7 +2,7 @@
 //                   OpenMS -- Open-Source Mass Spectrometry
 // --------------------------------------------------------------------------
 // Copyright The OpenMS Team -- Eberhard Karls University Tuebingen,
-// ETH Zurich, and Freie Universitaet Berlin 2002-2018.
+// ETH Zurich, and Freie Universitaet Berlin 2002-2020.
 //
 // This software is released under a three-clause BSD license:
 //  * Redistributions of source code must retain the above copyright
@@ -113,11 +113,6 @@ class TOPPSiriusAdapter :
 
 
 protected:
-
-  static bool extractAndCompareScanIndexLess_(const String& i, const String& j)
-  {
-    return (SiriusMzTabWriter::extract_scan_index(i) < SiriusMzTabWriter::extract_scan_index(j));
-  }
 
   void registerOptionsAndFlags_() override
   {
@@ -245,7 +240,7 @@ protected:
     //-------------------------------------------------------------
 
     // sort vector path list
-    std::sort(subdirs.begin(), subdirs.end(), extractAndCompareScanIndexLess_);
+    SiriusAdapterAlgorithm::sortSiriusWorkspacePathsByScanIndex(subdirs);
 
     // convert sirius_output to mztab and store file
     int candidates = sirius_algo.getCandidates();

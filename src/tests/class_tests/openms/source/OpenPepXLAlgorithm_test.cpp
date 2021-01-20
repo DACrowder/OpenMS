@@ -2,7 +2,7 @@
 //                   OpenMS -- Open-Source Mass Spectrometry
 // --------------------------------------------------------------------------
 // Copyright The OpenMS Team -- Eberhard Karls University Tuebingen,
-// ETH Zurich, and Freie Universitaet Berlin 2002-2018.
+// ETH Zurich, and Freie Universitaet Berlin 2002-2020.
 //
 // This software is released under a three-clause BSD license:
 //  * Redistributions of source code must retain the above copyright
@@ -97,13 +97,16 @@ PeakMap spectra;
 OpenPepXLAlgorithm search_algorithm;
 Param algo_param = search_algorithm.getParameters();
 algo_param.setValue("modifications:fixed", ListUtils::create<String>("Carbamidomethyl (C)"));
+algo_param.setValue("fragment:mass_tolerance", 0.2, "Fragment mass tolerance");
+algo_param.setValue("fragment:mass_tolerance_xlinks", 0.3, "Fragment mass tolerance for cross-link ions");
+algo_param.setValue("fragment:mass_tolerance_unit", "Da", "Unit of fragment m");
+algo_param.setValue("algorithm:number_top_hits", 5, "Number of top hits reported for each spectrum pair");
 search_algorithm.setParameters(algo_param);
 
 // run algorithm
 OpenPepXLAlgorithm::ExitCodes exit_code = search_algorithm.run(unprocessed_spectra, cfeatures, fasta_db, protein_ids, peptide_ids, preprocessed_pair_spectra, spectrum_pairs, all_top_csms, spectra);
 
 TEST_EQUAL(exit_code, OpenPepXLAlgorithm::EXECUTION_OK)
-TEST_EQUAL(unprocessed_spectra.size(), 217)
 TEST_EQUAL(protein_ids.size(), 1)
 TEST_EQUAL(peptide_ids.size(), 12)
 TEST_EQUAL(spectra.size(), 217)
