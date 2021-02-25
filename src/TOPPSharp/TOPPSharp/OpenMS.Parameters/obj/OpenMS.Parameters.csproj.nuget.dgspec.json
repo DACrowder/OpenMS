@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\davea\\source\\repos\\OpenMS\\src\\TOPPSharp\\OpenMS.Parameters\\OpenMS.Parameters.csproj": {}
+    "C:\\Users\\davea\\source\\repos\\OpenMS\\src\\TOPPSharp\\TOPPSharp\\OpenMS.Parameters\\OpenMS.Parameters.csproj": {}
   },
   "projects": {
-    "C:\\Users\\davea\\source\\repos\\OpenMS\\src\\TOPPSharp\\OpenMS.Parameters\\OpenMS.Parameters.csproj": {
+    "C:\\Users\\davea\\source\\repos\\OpenMS\\src\\TOPPSharp\\TOPPSharp\\OpenMS.Parameters\\OpenMS.Parameters.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\davea\\source\\repos\\OpenMS\\src\\TOPPSharp\\OpenMS.Parameters\\OpenMS.Parameters.csproj",
+        "projectUniqueName": "C:\\Users\\davea\\source\\repos\\OpenMS\\src\\TOPPSharp\\TOPPSharp\\OpenMS.Parameters\\OpenMS.Parameters.csproj",
         "projectName": "OpenMS.Parameters",
-        "projectPath": "C:\\Users\\davea\\source\\repos\\OpenMS\\src\\TOPPSharp\\OpenMS.Parameters\\OpenMS.Parameters.csproj",
+        "projectPath": "C:\\Users\\davea\\source\\repos\\OpenMS\\src\\TOPPSharp\\TOPPSharp\\OpenMS.Parameters\\OpenMS.Parameters.csproj",
         "packagesPath": "C:\\Users\\davea\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\davea\\source\\repos\\OpenMS\\src\\TOPPSharp\\OpenMS.Parameters\\obj\\",
+        "outputPath": "C:\\Users\\davea\\source\\repos\\OpenMS\\src\\TOPPSharp\\TOPPSharp\\OpenMS.Parameters\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -29,7 +29,6 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -41,7 +40,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "CommandLineParser": {
               "target": "Package",
@@ -57,13 +55,7 @@
             "net48"
           ],
           "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "warn": true
         }
       }
     }

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "MfeFhx93SmF9RNvR8lk6HZPzuD4nK8h51Jlaz+x+oYGGX0VsqQwg4yHFp7yRIRtAwrXA6szFZPjiWPShDjJ43A==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\davea\\source\\repos\\OpenMS\\src\\TOPPSharp\\TOPPSharp\\OpenMS.Parameters\\OpenMS.Parameters.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\davea\\.nuget\\packages\\commandlineparser\\2.8.0\\commandlineparser.2.8.0.nupkg.sha512"
+  ],
+  "logs": []
+}
