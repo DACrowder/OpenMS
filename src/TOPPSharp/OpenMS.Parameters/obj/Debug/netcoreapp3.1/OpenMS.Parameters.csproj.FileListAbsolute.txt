@@ -1,0 +1,14 @@
+C:\Users\davea\source\repos\OpenMS\src\TOPPSharp\OpenMS.Parameters\bin\Debug\netcoreapp3.1\OpenMS.Parameters.exe
+C:\Users\davea\source\repos\OpenMS\src\TOPPSharp\OpenMS.Parameters\bin\Debug\netcoreapp3.1\OpenMS.Parameters.deps.json
+C:\Users\davea\source\repos\OpenMS\src\TOPPSharp\OpenMS.Parameters\bin\Debug\netcoreapp3.1\OpenMS.Parameters.runtimeconfig.json
+C:\Users\davea\source\repos\OpenMS\src\TOPPSharp\OpenMS.Parameters\bin\Debug\netcoreapp3.1\OpenMS.Parameters.runtimeconfig.dev.json
+C:\Users\davea\source\repos\OpenMS\src\TOPPSharp\OpenMS.Parameters\bin\Debug\netcoreapp3.1\OpenMS.Parameters.dll
+C:\Users\davea\source\repos\OpenMS\src\TOPPSharp\OpenMS.Parameters\bin\Debug\netcoreapp3.1\OpenMS.Parameters.pdb
+C:\Users\davea\source\repos\OpenMS\src\TOPPSharp\OpenMS.Parameters\bin\Debug\netcoreapp3.1\CommandLine.dll
+C:\Users\davea\source\repos\OpenMS\src\TOPPSharp\OpenMS.Parameters\obj\Debug\netcoreapp3.1\OpenMS.Parameters.AssemblyInfoInputs.cache
+C:\Users\davea\source\repos\OpenMS\src\TOPPSharp\OpenMS.Parameters\obj\Debug\netcoreapp3.1\OpenMS.Parameters.AssemblyInfo.cs
+C:\Users\davea\source\repos\OpenMS\src\TOPPSharp\OpenMS.Parameters\obj\Debug\netcoreapp3.1\OpenMS.Parameters.csproj.CoreCompileInputs.cache
+C:\Users\davea\source\repos\OpenMS\src\TOPPSharp\OpenMS.Parameters\obj\Debug\netcoreapp3.1\OpenMS.Parameters.csproj.CopyComplete
+C:\Users\davea\source\repos\OpenMS\src\TOPPSharp\OpenMS.Parameters\obj\Debug\netcoreapp3.1\OpenMS.Parameters.dll
+C:\Users\davea\source\repos\OpenMS\src\TOPPSharp\OpenMS.Parameters\obj\Debug\netcoreapp3.1\OpenMS.Parameters.pdb
+C:\Users\davea\source\repos\OpenMS\src\TOPPSharp\OpenMS.Parameters\obj\Debug\netcoreapp3.1\OpenMS.Parameters.genruntimeconfig.cache
